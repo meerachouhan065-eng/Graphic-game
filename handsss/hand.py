@@ -11,7 +11,7 @@ MODEL_PATH = Path(
     r"C:\Users\DELL\Desktop\Master web\play code\play\handsss\hand_landmarker.task"
 )
 IMAGE_PATH = Path(
-    r"C:\Users\DELL\Desktop\Master web\play code\play\handsss\images.jpg"
+    r"C:\Users\DELL\Desktop\Master web\play code\play\handsss\images.jpg"  <----- # please inter your img url
 )
 
 # =============================
