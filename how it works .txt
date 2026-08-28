@@ -1,0 +1,223 @@
+# HOW TO USE
+
+# OpenCV + MediaPipe Live Image Reveal
+
+This project uses Python, OpenCV and MediaPipe to create a real-time hand-controlled image reveal effect.
+
+The user uses both hands to create a four-point area. The area acts like a hole in a virtual tissue/paper layer, revealing a fixed image underneath.
+
+IMPORTANT:
+The image is NOT resized to fit the selected area.
+The image remains fixed and only the selected area reveals it.
+
+# REQUIREMENTS
+
+Python 3.11
+
+Required Python packages:
+
+opencv-python
+mediapipe
+numpy
+
+Install them with:
+
+pip install opencv-python mediapipe numpy
+
+# PROJECT FILES
+
+The project should contain:
+
+hand.py
+hand_landmarker.task
+image.jpg
+
+Example:
+
+handsss/
+│
+├── hand.py
+├── hand_landmarker.task
+└── image.jpg
+
+# MODEL FILE
+
+The MediaPipe Hand Landmarker model is required:
+
+hand_landmarker.task
+
+The model file must be placed in the same folder as hand.py.
+
+The official MediaPipe model should be used.
+
+# IMAGE
+
+Put the image you want to reveal in the same folder as hand.py.
+
+Rename it:
+
+image.jpg
+
+The image will be used as the fixed background/reveal layer.
+
+# CAMERA
+
+Open hand.py and find:
+
+CAMERA_SOURCE = 1
+
+Change the number if required.
+
+Examples:
+
+CAMERA_SOURCE = 0
+
+Usually 0 means the default webcam.
+
+CAMERA_SOURCE = 1
+
+Can be used for another camera source, such as Camo Studio.
+
+# RUN THE PROGRAM
+
+Open PowerShell or Command Prompt in the project folder.
+
+Example:
+
+cd "C:\Users\DELL\Desktop\Master web\play code\play\handsss"
+
+Then run:
+
+python hand.py
+
+# HOW IT WORKS
+
+The program uses MediaPipe Hand Landmarker to detect up to two hands.
+
+Each hand has 21 landmarks.
+
+The program uses:
+
+Thumb fingertip = landmark 4
+Index fingertip = landmark 8
+
+The two hands provide four points:
+
+Left hand:
+
+* Thumb → bottom-left
+* Index finger → top-left
+
+Right hand:
+
+* Thumb → bottom-right
+* Index finger → top-right
+
+These four points create a polygon.
+
+The polygon becomes a mask.
+
+Only the area inside the mask reveals the fixed image.
+
+The rest of the screen continues showing the camera feed.
+
+# CONTROLS
+
+Q
+
+Press Q to quit the program.
+
+F
+
+Press F to toggle fullscreen mode.
+
+# TROUBLESHOOTING
+
+1. Camera not detected
+
+Try changing:
+
+CAMERA_SOURCE = 0
+
+to:
+
+CAMERA_SOURCE = 1
+
+or another available camera number.
+
+2. Model file not found
+
+Make sure:
+
+hand_landmarker.task
+
+is in the same folder as:
+
+hand.py
+
+3. Image not found
+
+Make sure:
+
+image.jpg
+
+is in the same folder as:
+
+hand.py
+
+4. MediaPipe error
+
+Check the installed version:
+
+pip show mediapipe
+
+This project was developed using:
+
+MediaPipe 0.10.33
+
+5. OpenCV error
+
+Check:
+
+pip show opencv-python
+
+The project was developed using:
+
+OpenCV 4.13.0
+
+# PERFORMANCE
+
+Hand detection is performed on a smaller copy of the camera frame to improve performance.
+
+The selected polygon is processed using a limited region of interest (ROI), reducing unnecessary processing.
+
+The reveal edge also uses a small Gaussian blur/feather effect for a smoother transition.
+
+# PROJECT STATUS
+
+OpenCV camera                    COMPLETE
+MediaPipe installation           COMPLETE
+Hand Landmarker                  COMPLETE
+21 hand landmarks                COMPLETE
+Index fingertip tracking         COMPLETE
+Two-hand tracking                COMPLETE
+Four-point polygon selection     COMPLETE
+Fixed image reveal               COMPLETE
+
+# FUTURE IDEAS
+
+* Better perspective correction
+* More natural tissue/portal effect
+* Video instead of a static image
+* Animated reveal
+* Better hand interaction
+* Browser/web version
+* Online hosting
+* Touch/button interaction
+* Multiple images or scenes
+
+# AUTHOR NOTE
+
+This project was created as an experimental computer-vision project using Python, OpenCV and MediaPipe.
+
+The goal is to understand how real-time hand tracking, coordinates, masks and image compositing can be combined to create an interactive visual effect.
